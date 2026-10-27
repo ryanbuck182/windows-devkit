@@ -65,16 +65,18 @@
 	cam = commit --amend -m
 
 	# -----------Diff----------
+	# Aliases that use the default branch run as shell commands, which start in the repo root
+	# They cd back to where git was run from (GIT_PREFIX) so file paths still work
 	ds = diff --staged
 	dh = diff HEAD
-	dm = diff main
+	dm = "!cd \"${GIT_PREFIX:-.}\" && git diff \"$(git default-branch)\""
 	dl = diff HEAD~1
 
 	# Only the names and statuses of the files that changed
 	df = diff --name-status
 	dsf = diff --staged --name-status
 	dhf = diff HEAD --name-status
-	dmf = diff main --name-status
+	dmf = "!cd \"${GIT_PREFIX:-.}\" && git diff \"$(git default-branch)\" --name-status"
 	dlf = diff HEAD~1 --name-status
 
 	# -----------Log-----------
@@ -88,16 +90,17 @@
 	lg10 = log --oneline --graph -10
 	lg15 = log --oneline --graph -15
 
-	# In HEAD but not main
-	lmh = log --oneline main..HEAD
+	# In HEAD but not the default branch
+	lmh = "!cd \"${GIT_PREFIX:-.}\" && git log --oneline \"$(git default-branch)\"..HEAD"
 
-	# In main but not HEAD
-	lhm = log --oneline HEAD..main
+	# In the default branch but not HEAD
+	lhm = "!cd \"${GIT_PREFIX:-.}\" && git log --oneline HEAD..\"$(git default-branch)\""
 
 	# ---------Switch----------
 	# Create new branch and switch to it
 	swc = switch -c
-	swm = switch main
+	# Switch to the default branch
+	swm = "!git switch \"$(git default-branch)\""
 
 	# ----------Stash----------
 	sh = stash
@@ -124,8 +127,8 @@
 	plm = -c pull.ff=true pull
 	plr = -c pull.ff=true pull --rebase
 
-	# Pull from main and merge
-	plomm = -c pull.ff=true pull origin main
+	# Pull from the default branch and merge
+	plomm = "!git -c pull.ff=true pull origin \"$(git default-branch)\""
 
 	# ---------Branch----------
 
