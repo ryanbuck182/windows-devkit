@@ -1,7 +1,7 @@
 # Alias for tp + exit
-# This file isn't actually used cause of technical reasons
-# The command's implementation is in setup/generate-wrappers and src/powershell/profile
+# cmd uses src/cmd/tpx.bat instead
 
 tp
+# Give the new tab time to open before closing this one
 Start-Sleep -Milliseconds 500
 exit

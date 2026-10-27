@@ -6,8 +6,7 @@ $userProfile = $PROFILE.CurrentUserAllHosts
 # Create inject dir if doesn't exist
 [System.IO.Directory]::CreateDirectory((Split-Path -Path $injectFile -Parent)) | Out-Null
 
-# Exclude xx cause exit won't work from a script
-$commandScripts = Get-ChildItem -Path $commandDir -Filter "*.ps1" | Where-Object { $_.Name -notlike "xx.ps1" }
+$commandScripts = Get-ChildItem -Path $commandDir -Filter "*.ps1"
 
 # Commands use this to find the devkit
 $functionDefs = @("`$DevkitRoot = '$devkitRoot'")
