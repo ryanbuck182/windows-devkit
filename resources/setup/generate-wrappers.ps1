@@ -41,6 +41,6 @@ exit
 Set-Content -Path (Join-Path $wrapperDir "tpx.bat") -Value @"
 :: Alias for tp + exit
 @echo off
-tp
+call tp
 exit
 "@
