@@ -1,4 +1,8 @@
-# Alias for tp + exit
+<#
+.SYNOPSIS
+Alias for tp + exit
+#>
+
 # cmd uses src/cmd/tpx.bat instead
 
 tp

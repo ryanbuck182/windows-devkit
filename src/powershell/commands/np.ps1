@@ -1,4 +1,7 @@
-# Open notepad
+<#
+.SYNOPSIS
+Open notepad
+#>
 
 param (
     [string]$Path = "."

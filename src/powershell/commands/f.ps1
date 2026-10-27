@@ -1,4 +1,7 @@
-# Open a new file explorer window at a specified directory.
+<#
+.SYNOPSIS
+Open a new file explorer window at a specified directory.
+#>
 
 param (
     [string]$Path = "."

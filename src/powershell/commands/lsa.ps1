@@ -1,4 +1,7 @@
-# Show ALL files and directories in the path
+<#
+.SYNOPSIS
+Show ALL files and directories in the path
+#>
 
 param (
     [string]$Path = "."

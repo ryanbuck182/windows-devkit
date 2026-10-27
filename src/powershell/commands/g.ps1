@@ -1,3 +1,6 @@
-# Alias for git
+<#
+.SYNOPSIS
+Alias for git
+#>
 
 git @args

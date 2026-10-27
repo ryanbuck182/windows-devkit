@@ -1,3 +1,6 @@
-# Copy the path to the devkit
+<#
+.SYNOPSIS
+Copy the path to the devkit
+#>
 
 Set-Clipboard "`"$DevkitRoot`""

@@ -1,4 +1,7 @@
-# Open VS code at the current directory or a specified one
+<#
+.SYNOPSIS
+Open VS code at the current directory or a specified one
+#>
 
 param (
     [string]$Path = "."

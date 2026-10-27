@@ -1,3 +1,6 @@
-# Open the devkit in file explorer
+<#
+.SYNOPSIS
+Open the devkit in file explorer
+#>
 
 Start-Process $DevkitRoot
