@@ -1,5 +1,5 @@
 # My preferred configuration options for git.
-# The settings and aliases themselves are in git/devkit.gitconfig
+# The settings and aliases themselves are in src/git/devkit.gitconfig
 
 # Username and email
 $configPath = (Join-Path $PSScriptRoot "..\..\config.psd1")
@@ -16,7 +16,7 @@ if (Test-Path $configPath) {
 # ---------Include---------
 # -------------------------
 
-$devkitConfig = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\git\devkit.gitconfig")) -replace '\\', '/'
+$devkitConfig = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\..\src\git\devkit.gitconfig")) -replace '\\', '/'
 
 $globalConfig = $env:GIT_CONFIG_GLOBAL
 if (-not $globalConfig) { $globalConfig = Join-Path $HOME ".gitconfig" }
