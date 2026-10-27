@@ -1,7 +1,6 @@
 $commandDir = Join-Path $PSScriptRoot "..\ps-commands"
 $injectFile = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\..\build\ps-profile\inject.ps1"))
 $userProfile = $PROFILE.CurrentUserAllHosts
-$executionPolicy = Get-Content (Join-Path $PSScriptRoot ".\ExecutionPolicy.ps1") -Raw
 
 # Create inject dir if doesn't exist
 [System.IO.Directory]::CreateDirectory((Split-Path -Path $injectFile -Parent)) | Out-Null
@@ -27,12 +26,10 @@ Set-Content -Path $injectFile -Value $injectContent
 $extraInjects = & (Join-Path $PSScriptRoot ".\profile-additions.ps1")
 
 # Add boundary markers to injection code
-# Ensure execution policy allows scripts
 $beginMarker = "# BEGIN DEVKIT COMMAND INJECTION"
 $endMarker = "# END DEVKIT COMMAND INJECTION"
 $injectionBlock = @"
 $beginMarker
-$executionPolicy
 . '$injectFile'
 $extraInjects
 $endMarker
