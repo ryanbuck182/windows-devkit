@@ -14,7 +14,7 @@ function New-WrapperContent($commandPath) {
 return @"
 :: Wrapper for "$commandPath"
 @echo off
-powershell -ExecutionPolicy Bypass -File "$commandPath" %*"
+powershell -ExecutionPolicy Bypass -File "$commandPath" %*
 "@
 }
 
