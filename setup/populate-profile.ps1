@@ -12,16 +12,17 @@ $commandScripts = Get-ChildItem -Path $commandDir -Filter "*.ps1" | Where-Object
 # Commands use this to find the devkit
 $functionDefs = @("`$DevkitRoot = '$devkitRoot'")
 
-# Generate function wrappers for each command
+# Generate a function for each command, with the command's script as the body
 foreach ($script in $commandScripts) {
+    $body = (Get-Content -Path $script.FullName -Raw).Trim()
     $functionDefs += @"
 function $($script.BaseName) {
-    & '$($script.FullName)' @args
+$body
 }
 "@
 }
 
-# Write function wrappers to inject file
+# Write functions to inject file
 $injectContent = $functionDefs -join "`n"
 Set-Content -Path $injectFile -Value $injectContent
 
