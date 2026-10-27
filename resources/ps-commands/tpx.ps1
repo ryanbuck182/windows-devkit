@@ -3,4 +3,5 @@
 # The command's implementation is in setup/generate-wrappers and setup/profile-additions
 
 tp
+Start-Sleep -Milliseconds 500
 exit

@@ -42,5 +42,7 @@ Set-Content -Path (Join-Path $wrapperDir "tpx.bat") -Value @"
 :: Alias for tp + exit
 @echo off
 call tp
+:: Give the new tab time to open before closing this one
+timeout /t 1 /nobreak > nul
 exit
 "@
