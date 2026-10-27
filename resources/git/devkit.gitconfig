@@ -1,0 +1,189 @@
+# My preferred configuration options for git.
+# This file is included from the global git config by setup.
+# Values set in the global config override the ones here.
+
+# -------------------------
+# --------Settings---------
+# -------------------------
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nano
+
+	# Don't automatically change LF to CRLF
+	autocrlf = false
+
+[pull]
+	# Only pull if fastforward is possible
+	# Can use plm or plr alias if not
+	ff = only
+
+[merge]
+	# https://www.ductile.systems/zdiff3/
+	conflictstyle = zdiff3
+
+[diff]
+	# https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
+	algorithm = histogram
+
+	# Color moved lines (default is zebra)
+	colorMoved = default
+
+[push]
+	# Push new local branches to remote automatically
+	autoSetupRemote = true
+
+# -------------------------
+# ---------Aliases---------
+# -------------------------
+
+[alias]
+	# -----Simple Aliases------
+	s = status
+	a = add
+	d = diff
+	sw = switch
+	f = fetch
+	pl = pull
+	ps = push
+	co = checkout
+
+	# -----------Add-----------
+
+	# Add specific changes from the working tree
+	ap = add -p
+
+	# Add files that are already tracked
+	au = add -u
+
+	# ---------Commit----------
+	c = commit
+	cm = commit -m
+	ca = commit --amend
+	cam = commit --amend -m
+
+	# -----------Diff----------
+	ds = diff --staged
+	dh = diff HEAD
+	dm = diff main
+	dl = diff HEAD~1
+
+	# Only the names and statuses of the files that changed
+	df = diff --name-status
+	dsf = diff --staged --name-status
+	dhf = diff HEAD --name-status
+	dmf = diff main --name-status
+	dlf = diff HEAD~1 --name-status
+
+	# -----------Log-----------
+	l = log --oneline
+	l5 = log --oneline -5
+	l10 = log --oneline -10
+	l15 = log --oneline -15
+
+	lg = log --oneline --graph
+	lg5 = log --oneline --graph -5
+	lg10 = log --oneline --graph -10
+	lg15 = log --oneline --graph -15
+
+	# In HEAD but not main
+	lmh = log --oneline main..HEAD
+
+	# In main but not HEAD
+	lhm = log --oneline HEAD..main
+
+	# ---------Switch----------
+	# Create new branch and switch to it
+	swc = switch -c
+	swm = switch main
+
+	# ----------Stash----------
+	sh = stash
+	shs = stash show
+	shl = stash list
+	shps = stash push
+	shop = stash pop
+	sha = stash apply
+
+	# ----------Merge----------
+	mg = merge
+	mgc = merge --continue
+	mga = merge --abort
+
+	# ---------Rebase----------
+	rb = rebase
+	rbo = rebase --onto
+	rbi = rebase -i
+	rbc = rebase --continue
+	rba = rebase --abort
+
+	# ----------Pull-----------
+	# Pull with merge/rebase
+	plm = -c pull.ff=true pull
+	plr = -c pull.ff=true pull --rebase
+
+	# Pull from main and merge
+	plomm = -c pull.ff=true pull origin main
+
+	# ---------Branch----------
+
+	b = branch
+	b-d = branch -D
+
+	# Branch list by last commit
+	bl = branch --sort=-committerdate
+
+	# List of fully-merged branches by last commit
+	blm = branch --sort=-committerdate --merged
+
+	# Branch list but only the branches that contain a given commit
+	blc = branch --sort=-committerdate --contains
+
+	# ---------Restore---------
+	ro = restore
+	rop = restore --patch
+
+	ros = restore --staged
+	rosp = restore --staged --patch
+
+	# ----------Reset----------
+	# Purposely made to not be super convenient to type
+	r-h = reset --hard
+	r-h-h = reset --hard HEAD
+	r-h-l = reset --hard HEAD~
+
+	# ---------Remote----------
+	rv = remote -v
+	rsu = remote set-url
+
+	# ---------Bisect----------
+	bs = bisect
+	bsst = bisect start
+	bsg = bisect good
+	bsb = bisect bad
+	bso = bisect old
+	bsn = bisect new
+	bssk = bisect skip
+	bs-r = bisect reset
+
+	# ----------Tags-----------
+
+	# Create annotated tag
+	t = tag -a
+
+	# Push tags to origin
+	pst = push origin --tags
+
+	# ------Miscellaneous------
+
+	# Prune remote tracking branches for remote branches that no longer exist
+	fp = fetch --prune
+
+	# Remove all untracked files
+	cfd = clean -fd
+
+	# List all aliases
+	get-aliases = config --get-regexp ^alias\\.
+	ga = get-aliases
