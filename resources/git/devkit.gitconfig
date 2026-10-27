@@ -141,6 +141,16 @@
 	# Branch list but only the branches that contain a given commit
 	blc = branch --sort=-committerdate --contains
 
+	# Print the repo's default branch
+	# Uses devkit.defaultBranch if set (git config devkit.defaultBranch <branch>),
+	# then the remote's default branch, then master if only master exists, then main
+	default-branch = "!f() { \
+		git config devkit.defaultBranch && return; \
+		b=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null) && echo \"${b#origin/}\" && return; \
+		git show-ref -q --verify refs/heads/master && ! git show-ref -q --verify refs/heads/main && echo master && return; \
+		echo main; \
+	}; f"
+
 	# ---------Restore---------
 	ro = restore
 	rop = restore --patch
