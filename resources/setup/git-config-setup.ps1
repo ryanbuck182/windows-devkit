@@ -188,5 +188,5 @@ git aliasconfig alias.fp "fetch --prune"
 git aliasconfig alias.cfd "clean -fd"
 
 # List all aliases
-git aliasconfig alias.get-aliases "config --global --get-regexp ^alias\."
+git aliasconfig alias.get-aliases "config --get-regexp ^alias\."
 git aliasconfig alias.ga "get-aliases"
