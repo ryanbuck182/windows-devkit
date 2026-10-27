@@ -1,3 +1,4 @@
+$devkitRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $commandDir = Join-Path $PSScriptRoot "..\src\powershell\commands"
 $injectFile = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\build\ps-profile\inject.ps1"))
 $userProfile = $PROFILE.CurrentUserAllHosts
@@ -8,8 +9,10 @@ $userProfile = $PROFILE.CurrentUserAllHosts
 # Exclude xx cause exit won't work from a script
 $commandScripts = Get-ChildItem -Path $commandDir -Filter "*.ps1" | Where-Object { $_.Name -notlike "xx.ps1" }
 
+# Commands use this to find the devkit
+$functionDefs = @("`$DevkitRoot = '$devkitRoot'")
+
 # Generate function wrappers for each command
-$functionDefs = @()
 foreach ($script in $commandScripts) {
     $functionDefs += @"
 function $($script.BaseName) {
