@@ -1,4 +1,4 @@
-$batWrapperDir = Resolve-Path(Join-Path $PSScriptRoot "..\..\build\bat-wrappers")
+$batWrapperDir = Resolve-Path(Join-Path $PSScriptRoot "..\build\bat-wrappers")
 $currentPATH = [Environment]::GetEnvironmentVariable("PATH", "User")
 
 if ($currentPATH.Split(';') -notcontains $batWrapperDir) {

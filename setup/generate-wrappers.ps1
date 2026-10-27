@@ -1,7 +1,7 @@
 # Generates batch wrappers for the powershell commands
 
-$commandDir = Join-Path $PSScriptRoot "..\..\src\powershell\commands"
-$wrapperDir = Join-Path $PSScriptRoot "..\..\build\bat-wrappers"
+$commandDir = Join-Path $PSScriptRoot "..\src\powershell\commands"
+$wrapperDir = Join-Path $PSScriptRoot "..\build\bat-wrappers"
 
 # Create dir if doesn't exist
 [System.IO.Directory]::CreateDirectory($wrapperDir) | Out-Null

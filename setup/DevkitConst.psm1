@@ -1,10 +1,10 @@
-$DevkitRoot = Join-Path $PSScriptRoot "..\.." | Resolve-Path
+$DevkitRoot = Join-Path $PSScriptRoot ".." | Resolve-Path
 
 $DevkitDir = [PSCustomObject]@{
     Root = $DevkitRoot
-    Resources = "$DevkitRoot\resources\"
+    Src = "$DevkitRoot\src\"
     PSCommands = "$DevkitRoot\src\powershell\commands\"
-    Setup = "$DevkitRoot\resources\setup\"
+    Setup = "$DevkitRoot\setup\"
     Build = "$DevkitRoot\build\"
     BatWrappers = "$DevkitRoot\build\bat-wrappers\"
     ProfileInject = "$DevkitRoot\build\ps-profile\"
