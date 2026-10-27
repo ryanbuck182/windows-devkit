@@ -1,3 +1,3 @@
 # Rebuild the devkit
 
-& (Join-Path $PSScriptRoot "..\..\..\setup.bat") -SkipConfigDialog 
+& (Join-Path $DevkitRoot "setup.bat") -SkipConfigDialog
