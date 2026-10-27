@@ -2,7 +2,8 @@
 
 $commandDir = Join-Path $PSScriptRoot "..\src\powershell\commands"
 $wrapperDir = Join-Path $PSScriptRoot "..\build\bat-wrappers"
-$runPath = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\src\cmd\run.ps1"))
+$cmdDir = Join-Path $PSScriptRoot "..\src\cmd"
+$runPath = [System.IO.Path]::GetFullPath((Join-Path $cmdDir "run.ps1"))
 
 # Create dir if doesn't exist
 [System.IO.Directory]::CreateDirectory($wrapperDir) | Out-Null
@@ -32,20 +33,5 @@ Get-ChildItem -Path $commandDir -Filter *.ps1 | ForEach-Object {
     Set-Content -Path $wrapperPath -Value $wrapperContent
 }
 
-# TODO: Move everything following this to somewhere else
-
-# Have to do something special for xx cause exit is a keyword not a command
-Set-Content -Path (Join-Path $wrapperDir "xx.bat") -Value @"
-:: Alias for exit
-@echo off
-exit
-"@
-
-Set-Content -Path (Join-Path $wrapperDir "tpx.bat") -Value @"
-:: Alias for tp + exit
-@echo off
-call tp
-:: Give the new tab time to open before closing this one
-timeout /t 1 /nobreak > nul
-exit
-"@
+# Some commands have their own batch version, which replaces the generated wrapper
+Copy-Item -Path (Join-Path $cmdDir "*.bat") -Destination $wrapperDir -Force
