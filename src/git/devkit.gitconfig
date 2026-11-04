@@ -12,8 +12,8 @@
 [core]
 	editor = nano
 
-	# Don't automatically change LF to CRLF
-	autocrlf = false
+	# Don't automatically change LF to CRLF when checking out
+	autocrlf = input
 
 [pull]
 	# Only pull if fastforward is possible
