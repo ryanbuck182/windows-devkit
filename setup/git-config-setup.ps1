@@ -7,7 +7,8 @@ if (Test-Path $configPath) {
     $config = Import-PowerShellDataFile -Path $configPath
     git config --global user.name $config.GitUserName
     git config --global user.email $config.GitUserEmail
-} else {
+} elseif (-not (git config --global --includes user.name) -or -not (git config --global --includes user.email)) {
+    # Only warn if they aren't already set
     Write-Output "Unable to set git username and email because config file does not exist!"
     Write-Output "Please follow the instructions in config.psd1.template!"
 }
