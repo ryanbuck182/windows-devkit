@@ -1,5 +1,5 @@
 # My preferred configuration options for git.
-# This file is included from the global git config by setup.
+# The installer includes this file from the global git config.
 # Values set in the global config override the ones here.
 
 # -------------------------
