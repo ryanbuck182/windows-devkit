@@ -607,21 +607,11 @@ if ($includes -contains $include) {
     [System.IO.File]::WriteAllText($gitconfig, "[include]`n`tpath = $include`n" + $content)
 }
 
-# Name and email come from config.psd1 in the clone if there is one
-# Otherwise, ask for whichever isn't set yet and save it to this machine's global config
-$configFile = $null
-if ($Clone) { $configFile = Join-Path $Clone 'config.psd1' }
-
-if ($configFile -and (Test-Path $configFile)) {
-    $config = Import-PowerShellDataFile $configFile
-    git config --global user.name $config.GitUserName
-    git config --global user.email $config.GitUserEmail
-} else {
-    foreach ($key in 'user.name', 'user.email') {
-        if (-not (git config --global --includes $key)) {
-            do { $value = Read-Host "Your git $key" } until ($value)
-            git config --global $key $value
-        }
+# Ask for whichever of name and email isn't set yet and save it to this machine's global config
+foreach ($key in 'user.name', 'user.email') {
+    if (-not (git config --global --includes $key)) {
+        do { $value = Read-Host "Your git $key" } until ($value)
+        git config --global $key $value
     }
 }
 
