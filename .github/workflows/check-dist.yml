@@ -1,0 +1,24 @@
+# Fails if dist/ doesn't match a fresh build, so the installer on GitHub is always current
+
+name: Check built installer
+
+on: [push, pull_request]
+
+jobs:
+  check:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        shell: powershell
+        run: .\build.ps1
+
+      # git diff compares content, so the runner checking files out with CRLF doesn't count as a change
+      - name: Check dist/ is up to date
+        shell: bash
+        run: |
+          if ! git diff --exit-code --stat -- dist; then
+            echo "::error::dist/ is out of date. Run build.ps1 or setup.bat and commit the result."
+            exit 1
+          fi
